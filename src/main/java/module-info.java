@@ -5,5 +5,6 @@ module WeatherApplication {
     requires javafx.fxml;
 
     opens weatherApplication;
-    //opens weatherApplication.controller;
+    opens weatherApplication.controller;
+    opens weatherApplication.view;
 }
