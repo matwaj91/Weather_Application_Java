@@ -9,6 +9,9 @@ import weatherApplication.view.ViewFactory;
 public class WindowController extends BaseController{
 
     @FXML
+    private Label errorLabel;
+
+    @FXML
     private Button currentLocationButton;
 
     @FXML
@@ -32,10 +35,15 @@ public class WindowController extends BaseController{
 
     @FXML
     void currentLocationButtonAction() {
-        String currentLocation = currentLocationTextField.getText();
-        currentLocationTextField.clear();
-        currentLocationLabel.setText(currentLocation);
-
+        if(currentLocationTextField.getText().equals("")) {
+            currentLocationLabel.setText("Current Location");
+            errorLabel.setText("Please provide your current location!");
+        } else {
+            String currentLocation = currentLocationTextField.getText();
+            currentLocationTextField.clear();
+            currentLocationLabel.setText(currentLocation);
+            errorLabel.setText("");
+        }
     }
 
     @FXML
@@ -43,9 +51,15 @@ public class WindowController extends BaseController{
 
     @FXML
     void destinationButtonAction() {
-        String destination = destinationTextField.getText();
-        destinationTextField.clear();
-        destinationLabel.setText(destination);
+        if(destinationTextField.getText().equals("")) {
+            destinationLabel.setText("Destination");
+            errorLabel.setText("Please provide your destination!");
+        } else {
+            String currentLocation = destinationTextField.getText();
+            destinationTextField.clear();
+            destinationLabel.setText(currentLocation);
+            errorLabel.setText("");
+        }
     }
 
     @FXML

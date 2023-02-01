@@ -78,7 +78,7 @@
         <Label alignment="CENTER" layoutX="409.0" layoutY="357.0" prefHeight="70.0" prefWidth="372.0" style="-fx-border-color: black; -fx-border-width: 2;" styleClass="control" stylesheets="@../css/Style.css" AnchorPane.rightAnchor="14.0" />
         <Label alignment="CENTER" layoutX="409.0" layoutY="434.0" prefHeight="70.0" prefWidth="372.0" style="-fx-border-color: black; -fx-border-width: 2;" styleClass="control" stylesheets="@../css/Style.css" AnchorPane.rightAnchor="14.0" />
         <Label alignment="CENTER" layoutX="409.0" layoutY="512.0" prefHeight="70.0" prefWidth="372.0" style="-fx-border-color: black; -fx-border-width: 2;" styleClass="control" stylesheets="@../css/Style.css" AnchorPane.rightAnchor="14.0" />
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="149.0" layoutY="75.0" prefHeight="17.0" prefWidth="505.0" text="Error!!" textFill="#dd373f">
+        <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="149.0" layoutY="75.0" prefHeight="17.0" prefWidth="505.0" textFill="#dd373f">
             <font>
                 <Font size="18.0" />
             </font>
