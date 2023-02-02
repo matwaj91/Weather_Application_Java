@@ -5,15 +5,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import weatherApplication.controller.BaseController;
-import weatherApplication.controller.WindowController;
+import weatherApplication.controller.MainWindowController;
 
 import java.io.IOException;
 
 public class ViewFactory {
 
     public void showWindow() {
-        BaseController controller = new WindowController(this, "/fxml/Window.fxml");
+        BaseController controller = new MainWindowController(this, "/fxml/MainWindow.fxml");
         initializeStage(controller);
+    }
+
+    public Parent displayWeatherForecast() throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("/fxml/ParticularForecastWindow.fxml"));
+        return parent;
     }
 
     private void initializeStage(BaseController controller) {

@@ -1,12 +1,18 @@
 package weatherApplication.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import weatherApplication.view.ViewFactory;
 
-public class WindowController extends BaseController{
+import java.io.IOException;
+
+public class MainWindowController extends BaseController{
 
     @FXML
     private Label errorLabel;
@@ -29,7 +35,16 @@ public class WindowController extends BaseController{
     @FXML
     private Label destinationLabel;
 
-    public WindowController(ViewFactory viewFactory, String fxmlName) {
+    @FXML
+    private VBox leftVBox;
+
+    @FXML
+    private VBox rightVBox;
+
+    @FXML
+    private ParticularForecastWindowController particularForecastWindowController;
+
+    public MainWindowController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
     }
 
@@ -40,7 +55,7 @@ public class WindowController extends BaseController{
     void destinationTextFieldAction() {}
 
     @FXML
-    void currentLocationButtonAction() {
+    void currentLocationButtonAction() throws IOException {
         if (currentLocationTextField.getText().equals("")) {
             currentLocationLabel.setText("Current Location");
             errorLabel.setText("Please provide your current location!");
@@ -49,20 +64,12 @@ public class WindowController extends BaseController{
             currentLocationTextField.clear();
             currentLocationLabel.setText(currentLocation);
             errorLabel.setText("");
+            fillVBox(leftVBox);
         }
-        // TERAZ MUSIMY JAK JUZ MAMY MIASTO WPISANE PRZEZ USERA TO WPROWADZAMY DO TEGO MODEL.
-        // Wykorzystujemy do tego tzw service
-        //Weather weather = weatherService.get(cityName);
-
-        //Potem wyswietlamy
-        //displayWeather(weather);
-
-        //private void displayWeather(Weather weather) {};
     }
 
-
     @FXML
-    void destinationButtonAction() {
+    void destinationButtonAction() throws IOException {
         if(destinationTextField.getText().equals("")) {
             destinationLabel.setText("Destination");
             errorLabel.setText("Please provide your destination!");
@@ -71,6 +78,15 @@ public class WindowController extends BaseController{
             destinationTextField.clear();
             destinationLabel.setText(currentLocation);
             errorLabel.setText("");
+            fillVBox(rightVBox);
+        }
+    }
+
+    private void fillVBox(VBox vBox) throws IOException {
+        vBox.getChildren().clear();
+        for(int i = 0; i < 5; i++) {
+            Parent parent = viewFactory.displayWeatherForecast();
+            vBox.getChildren().add(parent);
         }
     }
 }

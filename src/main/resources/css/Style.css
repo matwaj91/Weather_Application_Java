@@ -8,3 +8,8 @@
     -fx-faint-focus-color: transparent;
     -fx-focus-color:black;
 }
+
+.anchor {
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
