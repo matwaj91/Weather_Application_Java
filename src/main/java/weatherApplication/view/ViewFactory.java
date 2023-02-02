@@ -16,7 +16,7 @@ public class ViewFactory {
         initializeStage(controller);
     }
 
-    public Parent displayWeatherForecast() throws IOException {
+    public Parent passParticularWindow() throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("/fxml/ParticularForecastWindow.fxml"));
         return parent;
     }
