@@ -57,7 +57,6 @@ public class MainWindowController extends BaseController{
     @FXML
     void currentLocationButtonAction() throws IOException {
         if (currentLocationTextField.getText().equals("")) {
-            currentLocationLabel.setText("Current Location");
             errorLabel.setText("Please provide your current location!");
         } else {
             String currentLocation = currentLocationTextField.getText();
@@ -71,7 +70,6 @@ public class MainWindowController extends BaseController{
     @FXML
     void destinationButtonAction() throws IOException {
         if(destinationTextField.getText().equals("")) {
-            destinationLabel.setText("Destination");
             errorLabel.setText("Please provide your destination!");
         } else {
             String currentLocation = destinationTextField.getText();
