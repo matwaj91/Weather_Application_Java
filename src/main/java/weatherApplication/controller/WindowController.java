@@ -34,8 +34,14 @@ public class WindowController extends BaseController{
     }
 
     @FXML
+    void currentLocationTextFieldAction() {}
+
+    @FXML
+    void destinationTextFieldAction() {}
+
+    @FXML
     void currentLocationButtonAction() {
-        if(currentLocationTextField.getText().equals("")) {
+        if (currentLocationTextField.getText().equals("")) {
             currentLocationLabel.setText("Current Location");
             errorLabel.setText("Please provide your current location!");
         } else {
@@ -44,10 +50,16 @@ public class WindowController extends BaseController{
             currentLocationLabel.setText(currentLocation);
             errorLabel.setText("");
         }
+        // TERAZ MUSIMY JAK JUZ MAMY MIASTO WPISANE PRZEZ USERA TO WPROWADZAMY DO TEGO MODEL.
+        // Wykorzystujemy do tego tzw service
+        //Weather weather = weatherService.get(cityName);
+
+        //Potem wyswietlamy
+        //displayWeather(weather);
+
+        //private void displayWeather(Weather weather) {};
     }
 
-    @FXML
-    void currentLocationTextFieldAction() {}
 
     @FXML
     void destinationButtonAction() {
@@ -61,7 +73,4 @@ public class WindowController extends BaseController{
             errorLabel.setText("");
         }
     }
-
-    @FXML
-    void destinationTextFieldAction() {}
 }
