@@ -12,7 +12,7 @@ public class WeatherService {
         this.weatherClient = weatherClient;
     }
 
-    public WeatherForecast getWeather(String cityName) throws IOException {
+    public Weather getWeather(String cityName) throws IOException {
         return weatherClient.getWeather(cityName);
 
     }

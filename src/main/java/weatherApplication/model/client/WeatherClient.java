@@ -1,10 +1,11 @@
 package weatherApplication.model.client;
 
-import weatherApplication.model.WeatherForecast;
+import weatherApplication.model.Weather;
+import weatherApplication.model.WeatherForecastParameters;
 
 import java.io.IOException;
 
 public interface WeatherClient {
 
-    WeatherForecast getWeather(String cityName) throws IOException;
+    Weather getWeather(String cityName) throws IOException;
 }
