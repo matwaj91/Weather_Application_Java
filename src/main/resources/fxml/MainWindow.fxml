@@ -15,7 +15,7 @@
     <children>
         <ImageView fitHeight="650.0" fitWidth="800.0" pickOnBounds="true">
             <image>
-                <Image url="@../image/cesar-couto-TIvFLeqZ4ec-unsplash.jpg" />
+                <Image url="@../image/cesar-couto-pC2xOplxsVs-unsplash.jpg" />
             </image>
         </ImageView>
         <Label alignment="CENTER" layoutX="87.0" layoutY="619.0" prefHeight="17.0" prefWidth="617.0" text="All rights reserved© 2023 Thank you for your visit!">
