@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import org.json.simple.parser.ParseException;
 import weatherApplication.model.WeatherService;
 import weatherApplication.model.WeatherServiceFactory;
 import weatherApplication.model.client.SpecificWeatherClient;
@@ -78,8 +79,8 @@ public class MainWindowController extends BaseController implements Initializabl
             currentLocationLabel.setText(currentLocation);
             errorLabel.setText("");
             fillVBox(leftVBox);
-            SpecificWeatherClient.getCurrentWeather(currentLocation);
-
+            //SpecificWeatherClient.getCurrentWeather(currentLocation);
+            SpecificWeatherClient.getForecastWeather(currentLocation);
         }
     }
 

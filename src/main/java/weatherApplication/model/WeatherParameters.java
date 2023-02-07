@@ -29,4 +29,14 @@ public class WeatherParameters {
     public String getWindSpeed() {
         return windSpeed;
     }
+
+    @Override
+    public String toString() {
+        return "WeatherParameters{" +
+                "icon='" + icon + '\'' +
+                ", temperature='" + temperature + '\'' +
+                ", pressure='" + pressure + '\'' +
+                ", windSpeed='" + windSpeed + '\'' +
+                '}';
+    }
 }

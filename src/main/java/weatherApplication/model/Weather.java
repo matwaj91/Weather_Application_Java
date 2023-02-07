@@ -21,4 +21,12 @@ public class Weather {
     public List<WeatherParameters> getWeatherParameters() {
         return weatherParameters;
     }
+
+    @Override
+    public String toString() {
+        return "Weather{" +
+                "weatherParameters=" + weatherParameters +
+                ", weatherForecastParameters=" + weatherForecastParameters +
+                '}';
+    }
 }
