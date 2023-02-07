@@ -80,7 +80,7 @@ public class MainWindowController extends BaseController implements Initializabl
             errorLabel.setText("");
             fillVBox(leftVBox);
             //SpecificWeatherClient.getCurrentWeather(currentLocation);
-            SpecificWeatherClient.getForecastWeather(currentLocation);
+            //SpecificWeatherClient.getForecastWeather(currentLocation);
         }
     }
 

@@ -19,7 +19,7 @@
             </Label>
             <ImageView fx:id="image" fitHeight="60.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                 <image>
-                    <Image url="@../image/snowy.png" />
+                    <Image url="@../image/10d.png" />
                 </image>
             </ImageView>
             <VBox prefHeight="60.0" prefWidth="89.0">
