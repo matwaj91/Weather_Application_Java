@@ -50,13 +50,13 @@ public class MainWindowController extends BaseController implements Initializabl
     @FXML
     private ParticularForecastWindowController particularForecastWindowController;
 
-    WeatherService weatherService;
+    //WeatherService weatherService;
 
     SpecificWeatherClient particularWeatherClient;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        weatherService = WeatherServiceFactory.createWeatherService();
+        //weatherService = WeatherServiceFactory.createWeatherService();
     }
 
     public MainWindowController(ViewFactory viewFactory, String fxmlName)  {
@@ -79,7 +79,7 @@ public class MainWindowController extends BaseController implements Initializabl
             currentLocationLabel.setText(currentLocation);
             errorLabel.setText("");
             fillVBox(leftVBox);
-            //SpecificWeatherClient.getCurrentWeather(currentLocation);
+            SpecificWeatherClient.getCurrentWeather(currentLocation);
             //SpecificWeatherClient.getForecastWeather(currentLocation);
         }
     }

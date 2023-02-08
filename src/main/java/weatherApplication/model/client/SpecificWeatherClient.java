@@ -13,18 +13,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 import java.time.LocalDate;
 
 public class SpecificWeatherClient implements WeatherClient {
+
+
 
     private final static List<WeatherForecastParameters> forecastWeather = new ArrayList<>();
 
     @Override
     public Weather getWeather(String cityName) {
 
-        List<WeatherParameters> currentWeather = getCurrentWeather(cityName);
+        WeatherParameters currentWeather = getCurrentWeather(cityName);
 
         List<WeatherForecastParameters> forecastWeather = getForecastWeather(cityName);
 
@@ -81,9 +82,10 @@ public class SpecificWeatherClient implements WeatherClient {
                         JSONObject objectFromArray = (JSONObject) newArray.get(0);
                         String icon = objectFromArray.get("icon").toString();
 
-                        WeatherParameters weatherParameters = new WeatherParameters(icon, temperature, pressure, windSpeed);
-                        WeatherForecastParameters weatherForecastParameters = new WeatherForecastParameters(weekDay, weatherParameters);
+                        WeatherForecastParameters weatherForecastParameters =
+                                new WeatherForecastParameters(weekDay, icon, temperature, pressure, windSpeed);
                         forecastWeather.add(weatherForecastParameters);
+                        //System.out.println(forecastWeather);
                     }
                 }
             }
@@ -115,7 +117,7 @@ public class SpecificWeatherClient implements WeatherClient {
         return firstUpperCase;
     }
 
-    public static List<WeatherParameters> getCurrentWeather(String cityName) {
+    public static WeatherParameters getCurrentWeather(String cityName) {
 
         try {
             URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q="
@@ -136,6 +138,8 @@ public class SpecificWeatherClient implements WeatherClient {
                 JSONObject object;
                 JSONArray array;
 
+                String day = "Today";
+
                 object = (JSONObject) jsonObject.get("main");
                 String stringTemperature = object.get("temp").toString();
                 double doubleTemperature = Double.parseDouble(stringTemperature);
@@ -151,10 +155,7 @@ public class SpecificWeatherClient implements WeatherClient {
                 JSONObject objectFromArray = (JSONObject) array.get(0);
                 String icon = objectFromArray.get("icon").toString();
 
-                List<WeatherParameters> currentWeather = new ArrayList<>();
-                WeatherParameters currentWeatherParameters = new WeatherParameters(icon, temperature, pressure, windSpeed);
-                currentWeather.add(currentWeatherParameters);
-                return currentWeather;
+                return new WeatherParameters(day, icon, temperature, pressure, windSpeed);
             }
         } catch (Exception e) {
             e.printStackTrace();

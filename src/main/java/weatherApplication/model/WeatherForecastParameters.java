@@ -3,26 +3,47 @@ package weatherApplication.model;
 public class WeatherForecastParameters {
 
     private final String day;
-    private final WeatherParameters weatherParameters;
+    private final String icon;
+    private final String temperature;
+    private final String pressure;
+    private final String windSpeed;
 
-    public WeatherForecastParameters(String day, WeatherParameters weatherParameters) {
+    public WeatherForecastParameters(String day, String icon, String temperature, String pressure, String windSpeed) {
         this.day = day;
-        this.weatherParameters = weatherParameters;
+        this.icon = icon;
+        this.temperature = temperature;
+        this.pressure = pressure;
+        this.windSpeed = windSpeed;
     }
 
     public String getDay() {
         return day;
     }
 
-    public WeatherParameters getWeatherParameters() {
-        return weatherParameters;
+    public String getIcon() {
+        return icon;
+    }
+
+    public String getTemperature() {
+        return temperature;
+    }
+
+    public String getPressure() {
+        return pressure;
+    }
+
+    public String getWindSpeed() {
+        return windSpeed;
     }
 
     @Override
     public String toString() {
         return "WeatherForecastParameters{" +
                 "day='" + day + '\'' +
-                ", weatherParameters=" + weatherParameters +
+                ", icon='" + icon + '\'' +
+                ", temperature='" + temperature + '\'' +
+                ", pressure='" + pressure + '\'' +
+                ", windSpeed='" + windSpeed + '\'' +
                 '}';
     }
 }

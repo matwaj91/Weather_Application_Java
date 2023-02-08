@@ -5,11 +5,11 @@ import java.util.List;
 
 public class Weather {
 
-    private List<WeatherParameters> weatherParameters;
+    private WeatherParameters weatherParameters;
 
     private List<WeatherForecastParameters> weatherForecastParameters;
 
-    public Weather(List<WeatherParameters> weatherParameters, List<WeatherForecastParameters> weatherForecastParameters) {
+    public Weather(WeatherParameters weatherParameters, List<WeatherForecastParameters> weatherForecastParameters) {
         this.weatherParameters = weatherParameters;
         this.weatherForecastParameters = weatherForecastParameters;
     }
@@ -18,7 +18,7 @@ public class Weather {
         return weatherForecastParameters;
     }
 
-    public List<WeatherParameters> getWeatherParameters() {
+    public WeatherParameters getWeatherParameters() {
         return weatherParameters;
     }
 
