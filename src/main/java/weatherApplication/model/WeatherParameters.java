@@ -16,6 +16,9 @@ public class WeatherParameters {
         this.windSpeed = windSpeed;
     }
 
+    public String getDay() {
+        return day;
+    }
 
     public String getIcon() {
         return icon;
@@ -36,7 +39,8 @@ public class WeatherParameters {
     @Override
     public String toString() {
         return "WeatherParameters{" +
-                "icon='" + icon + '\'' +
+                "day='" + day + '\'' +
+                ", icon='" + icon + '\'' +
                 ", temperature='" + temperature + '\'' +
                 ", pressure='" + pressure + '\'' +
                 ", windSpeed='" + windSpeed + '\'' +

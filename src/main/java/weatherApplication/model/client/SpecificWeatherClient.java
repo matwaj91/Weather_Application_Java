@@ -5,7 +5,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import weatherApplication.model.Config;
 import weatherApplication.model.Weather;
-import weatherApplication.model.WeatherForecastParameters;
 import weatherApplication.model.WeatherParameters;
 
 import java.io.IOException;
@@ -18,21 +17,17 @@ import java.time.LocalDate;
 
 public class SpecificWeatherClient implements WeatherClient {
 
-
-
-    private final static List<WeatherForecastParameters> forecastWeather = new ArrayList<>();
+    private final static List<WeatherParameters> forecastWeather = new ArrayList<>();
 
     @Override
     public Weather getWeather(String cityName) {
 
         WeatherParameters currentWeather = getCurrentWeather(cityName);
-
-        List<WeatherForecastParameters> forecastWeather = getForecastWeather(cityName);
-
+        List<WeatherParameters> forecastWeather = getForecastWeather(cityName);
         return new Weather(currentWeather, forecastWeather);
     }
 
-    public static List<WeatherForecastParameters> getForecastWeather(String cityName) {
+    private List<WeatherParameters> getForecastWeather(String cityName) {
         try {
             URL url = new URL("http://api.openweathermap.org/data/2.5/forecast?q="
                     + cityName + "&units=metric&appid=" + Config.API_KEY + "&lang=eng&units=metric");
@@ -60,10 +55,10 @@ public class SpecificWeatherClient implements WeatherClient {
                     JSONObject newObject = (JSONObject) array.get(i);
 
                     String date = newObject.get("dt_txt").toString();
-                    String weekDay = getNameDay(date);
+                    String day = getNameDay(date);
                     String formatYYYYMMDD = getYYYYMMDDFormat(date);
 
-                    if (!formatYYYYMMDD.equals(alreadyLoadedDay)) {
+                    if (!formatYYYYMMDD.equals(alreadyLoadedDay) && date.contains("12:00:00")) {
 
                         alreadyLoadedDay = formatYYYYMMDD;
 
@@ -82,10 +77,9 @@ public class SpecificWeatherClient implements WeatherClient {
                         JSONObject objectFromArray = (JSONObject) newArray.get(0);
                         String icon = objectFromArray.get("icon").toString();
 
-                        WeatherForecastParameters weatherForecastParameters =
-                                new WeatherForecastParameters(weekDay, icon, temperature, pressure, windSpeed);
-                        forecastWeather.add(weatherForecastParameters);
-                        //System.out.println(forecastWeather);
+                        WeatherParameters weatherParameters =
+                                new WeatherParameters(day, icon, temperature, pressure, windSpeed);
+                        forecastWeather.add(weatherParameters);
                     }
                 }
             }
@@ -94,16 +88,15 @@ public class SpecificWeatherClient implements WeatherClient {
             e.printStackTrace();
         }
         return null;
-
     }
 
-    private static String getYYYYMMDDFormat(String date) {
+    private String getYYYYMMDDFormat(String date) {
         String dateInRightFormat = date.replace("-", "");
         dateInRightFormat = dateInRightFormat.substring(0, 8);
         return dateInRightFormat;
     }
 
-    public static String getNameDay(String date) {
+    private String getNameDay(String date) {
         date = date.replace("-", "");
         int year = Integer.parseInt(date.substring(0, 4));
         int month = Integer.parseInt(date.substring(4, 6));
@@ -117,7 +110,7 @@ public class SpecificWeatherClient implements WeatherClient {
         return firstUpperCase;
     }
 
-    public static WeatherParameters getCurrentWeather(String cityName) {
+    private WeatherParameters getCurrentWeather(String cityName) {
 
         try {
             URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q="
@@ -163,7 +156,7 @@ public class SpecificWeatherClient implements WeatherClient {
         return null;
     }
 
-    private static int getResponse(URL url) throws IOException {
+    private int getResponse(URL url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.connect();
@@ -172,7 +165,7 @@ public class SpecificWeatherClient implements WeatherClient {
         return responseCode;
     }
 
-    private static String writeAllJsonDataToString(URL url) throws IOException {
+    private String writeAllJsonDataToString(URL url) throws IOException {
         String inline = "";
         Scanner scanner = new Scanner(url.openStream());
 

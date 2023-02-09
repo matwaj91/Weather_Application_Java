@@ -17,7 +17,7 @@ public class ViewFactory {
     }
 
     public Parent passParticularWindow() throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/fxml/ParticularForecastWindow.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("/fxml/ParticularWeatherWindow.fxml"));
         return parent;
     }
 
