@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import weatherApplication.model.Weather;
 import weatherApplication.model.WeatherParameters;
@@ -20,6 +22,9 @@ import java.util.ResourceBundle;
 
 
 public class MainWindowController extends BaseController {
+
+    @FXML
+    ParticularWeatherWindowController particularWeatherWindowController;
 
     @FXML
     private Label errorLabel;
@@ -48,6 +53,7 @@ public class MainWindowController extends BaseController {
     @FXML
     private VBox rightVBox;
 
+
     private WeatherParameters currentWeather;
     private List<WeatherParameters> weatherForecast;
 
@@ -73,23 +79,8 @@ public class MainWindowController extends BaseController {
             currentLocationTextField.clear();
             currentLocationLabel.setText(currentLocation);
             errorLabel.setText("");
-            getWeatherFromClient(currentLocation);
-            fillVBox(leftVBox);
-        }
-    }
-
-    private void getWeatherFromClient(String cityName) throws IOException {
-        WeatherService weatherService = new WeatherService(new SpecificWeatherClient());
-        Weather weather;
-
-        try {
-            weather = weatherService.getWeather(cityName);
-            currentWeather = weather.getCurrentWeather();
-            weatherForecast = weather.getWeatherForecast();
-            System.out.println(weather);
-        } catch (Exception e) {
-            System.out.println("error");
-            return;
+            //fillVBox(leftVBox);
+            particularWeatherWindowController.getWeatherFromClient(currentLocation);
         }
     }
 
@@ -107,8 +98,9 @@ public class MainWindowController extends BaseController {
 
     public void fillVBox(VBox vBox) throws IOException {
         vBox.getChildren().clear();
-        ViewFactory viewFactory = new ViewFactory();
-        Parent parent = viewFactory.passParticularWindow();
-        vBox.getChildren().add(parent);
+        for (int i = 0; i < 5; i++) {
+            //vBox.getChildren().add(parent);
+        }
     }
 }
+

@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ParticularWeatherWindowController extends BaseController implements Initializable {
+public class ParticularWeatherWindowController extends BaseController{
 
     @FXML
     private Label day;
@@ -37,10 +37,7 @@ public class ParticularWeatherWindowController extends BaseController implements
     private WeatherParameters currentWeather;
     private List<WeatherParameters> weatherForecast;
 
-    public void setWeather(WeatherParameters currentWeather, List<WeatherParameters> weatherForecast) {
-        this.currentWeather = currentWeather;
-        this.weatherForecast = weatherForecast;
-    }
+    public ParticularWeatherWindowController() {};
 
     public ParticularWeatherWindowController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
@@ -54,38 +51,35 @@ public class ParticularWeatherWindowController extends BaseController implements
             weather = weatherService.getWeather(cityName);
             currentWeather = weather.getCurrentWeather();
             weatherForecast = weather.getWeatherForecast();
-            setWeather(currentWeather,weatherForecast);
         } catch (Exception e) {
             System.out.println("Error");
             return;
         }
 
+        //System.out.println(currentWeather);
+        //fillCurrentWeatherWindow(currentWeather);
+        fillWeatherForecastWindow(weatherForecast);
+
     }
 
-    void fillCurrentWeatherWindow() {
+    void fillCurrentWeatherWindow(WeatherParameters currentWeather) {
         //Current weather
         this.day.setText(currentWeather.getDay());
-        this.image.setImage(new Image(String.valueOf(getClass().getResource
-                ("/image/" + currentWeather.getIcon() + "png"))));
+        this.image.setImage(new Image(String.valueOf(getClass().getResource("/image/" + currentWeather.getIcon() + ".png"))));
         this.temperature.setText(currentWeather.getTemperature());
         this.pressure.setText(currentWeather.getPressure());
         this.wind.setText(currentWeather.getWindSpeed());
+
     }
 
-    void fillWeatherForecastWindow() {
+    void fillWeatherForecastWindow(List<WeatherParameters> weatherForecast) {
         //ForecastWeather
         for(int i = 0; i < weatherForecast.size(); i++) {
             this.day.setText(weatherForecast.get(i).getDay());
-            this.image.setImage(new Image(String.valueOf(getClass().getResource
-                    ("/image/" + weatherForecast.get(i).getIcon() + "png"))));
+            this.image.setImage(new Image(String.valueOf(getClass().getResource("/image/" + weatherForecast.get(i).getIcon() + ".png"))));
             this.temperature.setText(weatherForecast.get(i).getTemperature());
             this.pressure.setText(weatherForecast.get(i).getPressure());
             this.wind.setText(weatherForecast.get(i).getWindSpeed());
         }
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        fillCurrentWeatherWindow();
     }
 }

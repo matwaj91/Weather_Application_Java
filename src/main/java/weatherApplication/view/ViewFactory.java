@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import weatherApplication.controller.BaseController;
 import weatherApplication.controller.MainWindowController;
+import weatherApplication.controller.ParticularWeatherWindowController;
 import weatherApplication.model.WeatherParameters;
 
 import java.io.IOException;
@@ -17,10 +18,10 @@ public class ViewFactory {
         initializeStage(controller);
     }
 
-    public Parent passParticularWindow() throws IOException {
+    /*public Parent passParticularWindow() throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("/fxml/ParticularWeatherWindow.fxml"));
         return parent;
-    }
+    }*/
 
     private void initializeStage(BaseController controller) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(controller.getFxmlName()));
