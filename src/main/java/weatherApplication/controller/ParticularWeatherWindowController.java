@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import weatherApplication.model.Weather;
 import weatherApplication.model.WeatherParameters;
 import weatherApplication.model.WeatherService;
@@ -17,7 +19,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ParticularWeatherWindowController extends BaseController{
+public class ParticularWeatherWindowController extends BaseController implements Initializable {
 
     @FXML
     private Label day;
@@ -34,16 +36,21 @@ public class ParticularWeatherWindowController extends BaseController{
     @FXML
     private Label wind;
 
+    @FXML
+    private AnchorPane particularWeatherWindow;
+
     private WeatherParameters currentWeather;
     private List<WeatherParameters> weatherForecast;
 
-    public ParticularWeatherWindowController() {};
+    public ParticularWeatherWindowController() {
+    }
 
     public ParticularWeatherWindowController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
     }
 
-    void getWeatherFromClient(String cityName) throws IOException {
+    @FXML
+    List<WeatherParameters> getWeatherFromClient(String cityName) throws IOException {
         WeatherService weatherService = new WeatherService(new SpecificWeatherClient());
         Weather weather;
 
@@ -53,33 +60,33 @@ public class ParticularWeatherWindowController extends BaseController{
             weatherForecast = weather.getWeatherForecast();
         } catch (Exception e) {
             System.out.println("Error");
-            return;
         }
 
-        //System.out.println(currentWeather);
-        //fillCurrentWeatherWindow(currentWeather);
         fillWeatherForecastWindow(weatherForecast);
 
+        return weatherForecast;
     }
 
     void fillCurrentWeatherWindow(WeatherParameters currentWeather) {
-        //Current weather
         this.day.setText(currentWeather.getDay());
         this.image.setImage(new Image(String.valueOf(getClass().getResource("/image/" + currentWeather.getIcon() + ".png"))));
         this.temperature.setText(currentWeather.getTemperature());
         this.pressure.setText(currentWeather.getPressure());
         this.wind.setText(currentWeather.getWindSpeed());
-
     }
 
-    void fillWeatherForecastWindow(List<WeatherParameters> weatherForecast) {
-        //ForecastWeather
-        for(int i = 0; i < weatherForecast.size(); i++) {
-            this.day.setText(weatherForecast.get(i).getDay());
-            this.image.setImage(new Image(String.valueOf(getClass().getResource("/image/" + weatherForecast.get(i).getIcon() + ".png"))));
-            this.temperature.setText(weatherForecast.get(i).getTemperature());
-            this.pressure.setText(weatherForecast.get(i).getPressure());
-            this.wind.setText(weatherForecast.get(i).getWindSpeed());
-        }
+    AnchorPane fillWeatherForecastWindow(List<WeatherParameters> weatherForecast) {
+        this.day.setText(weatherForecast.get(0).getDay());
+        this.image.setImage(new Image(String.valueOf(getClass().getResource("/image/" + weatherForecast.get(0).getIcon() + ".png"))));
+        this.temperature.setText(weatherForecast.get(0).getTemperature());
+        this.pressure.setText(weatherForecast.get(0).getPressure());
+        this.wind.setText(weatherForecast.get(0).getWindSpeed());
+
+        return particularWeatherWindow;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println(weatherForecast);
     }
 }

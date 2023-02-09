@@ -2,17 +2,12 @@ package weatherApplication.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import weatherApplication.model.Weather;
 import weatherApplication.model.WeatherParameters;
-import weatherApplication.model.WeatherService;
-import weatherApplication.model.client.SpecificWeatherClient;
 import weatherApplication.view.ViewFactory;
 
 import java.io.IOException;
@@ -21,10 +16,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class MainWindowController extends BaseController {
+public class MainWindowController extends BaseController implements Initializable{
 
     @FXML
-    ParticularWeatherWindowController particularWeatherWindowController;
+    ParticularWeatherWindowController leftController;
 
     @FXML
     private Label errorLabel;
@@ -53,8 +48,6 @@ public class MainWindowController extends BaseController {
     @FXML
     private VBox rightVBox;
 
-
-    private WeatherParameters currentWeather;
     private List<WeatherParameters> weatherForecast;
 
 
@@ -79,8 +72,11 @@ public class MainWindowController extends BaseController {
             currentLocationTextField.clear();
             currentLocationLabel.setText(currentLocation);
             errorLabel.setText("");
-            //fillVBox(leftVBox);
-            particularWeatherWindowController.getWeatherFromClient(currentLocation);
+            leftVBox.setVisible(true);
+            weatherForecast = leftController.getWeatherFromClient(currentLocation);
+            for (int i = 0; i < 5; i++) {
+                leftVBox.getChildren().add(new AnchorPane(leftController.fillWeatherForecastWindow(weatherForecast)));
+            }
         }
     }
 
@@ -89,18 +85,16 @@ public class MainWindowController extends BaseController {
         if (destinationTextField.getText().equals("")) {
             errorLabel.setText("Please provide your destination!");
         } else {
-            String currentLocation = destinationTextField.getText();
+            String destination = destinationTextField.getText();
             destinationTextField.clear();
-            destinationLabel.setText(currentLocation);
+            destinationLabel.setText(destination);
             errorLabel.setText("");
         }
     }
 
-    public void fillVBox(VBox vBox) throws IOException {
-        vBox.getChildren().clear();
-        for (int i = 0; i < 5; i++) {
-            //vBox.getChildren().add(parent);
-        }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+       leftVBox.setVisible(false);
     }
 }
 
