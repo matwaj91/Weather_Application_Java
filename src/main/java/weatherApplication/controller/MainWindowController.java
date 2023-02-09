@@ -15,7 +15,7 @@ import java.io.IOException;
 public class MainWindowController extends BaseController{
 
     @FXML
-    private ParticularWeatherWindowController particularForecastWindowController;
+    private ParticularWeatherWindowController particularWeatherWindowController;
 
     @FXML
     private Label errorLabel;
@@ -65,7 +65,7 @@ public class MainWindowController extends BaseController{
             currentLocationTextField.clear();
             currentLocationLabel.setText(currentLocation);
             errorLabel.setText("");
-            System.out.println(particularForecastWindowController); //null
+            System.out.println(particularWeatherWindowController); //null
             fillVBox(leftVBox);
         }
     }
