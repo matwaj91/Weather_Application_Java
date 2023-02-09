@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import weatherApplication.controller.BaseController;
 import weatherApplication.controller.MainWindowController;
+import weatherApplication.model.WeatherParameters;
 
 import java.io.IOException;
 

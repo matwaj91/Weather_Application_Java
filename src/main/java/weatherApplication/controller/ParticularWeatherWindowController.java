@@ -34,6 +34,13 @@ public class ParticularWeatherWindowController extends BaseController implements
     @FXML
     private Label wind;
 
+    private WeatherParameters currentWeather;
+    private List<WeatherParameters> weatherForecast;
+
+    public void setWeather(WeatherParameters currentWeather, List<WeatherParameters> weatherForecast) {
+        this.currentWeather = currentWeather;
+        this.weatherForecast = weatherForecast;
+    }
 
     public ParticularWeatherWindowController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
@@ -42,20 +49,20 @@ public class ParticularWeatherWindowController extends BaseController implements
     void getWeatherFromClient(String cityName) throws IOException {
         WeatherService weatherService = new WeatherService(new SpecificWeatherClient());
         Weather weather;
-        WeatherParameters currentWeather;
-        List<WeatherParameters> weatherForecast;
 
         try {
             weather = weatherService.getWeather(cityName);
             currentWeather = weather.getCurrentWeather();
             weatherForecast = weather.getWeatherForecast();
+            setWeather(currentWeather,weatherForecast);
         } catch (Exception e) {
             System.out.println("Error");
             return;
         }
+
     }
 
-    void fillCurrentWeatherWindow(WeatherParameters currentWeather) {
+    void fillCurrentWeatherWindow() {
         //Current weather
         this.day.setText(currentWeather.getDay());
         this.image.setImage(new Image(String.valueOf(getClass().getResource
@@ -65,7 +72,7 @@ public class ParticularWeatherWindowController extends BaseController implements
         this.wind.setText(currentWeather.getWindSpeed());
     }
 
-    void fillWeatherForecastWindow(List<WeatherParameters> weatherForecast) {
+    void fillWeatherForecastWindow() {
         //ForecastWeather
         for(int i = 0; i < weatherForecast.size(); i++) {
             this.day.setText(weatherForecast.get(i).getDay());
@@ -79,6 +86,6 @@ public class ParticularWeatherWindowController extends BaseController implements
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        fillCurrentWeatherWindow();
     }
 }
