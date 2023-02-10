@@ -39,11 +39,9 @@ public class SpecificWeatherClient implements WeatherClient {
             } else {
                 String inline = writeAllJsonDataToString(url);
 
-                //Using the JSON simple library parse the string into a json object
                 JSONParser parse = new JSONParser();
                 JSONObject jsonObject = (JSONObject) parse.parse(inline);
 
-                //Get the required object from the above created object
                 JSONObject object;
                 JSONArray array;
                 String alreadyLoadedDay = "";
@@ -51,17 +49,15 @@ public class SpecificWeatherClient implements WeatherClient {
                 array = (JSONArray) jsonObject.get("list");
 
                 for (int i = 0; i < array.size(); i++) {
-
                     JSONObject newObject = (JSONObject) array.get(i);
-
                     String date = newObject.get("dt_txt").toString();
                     String day = getNameDay(date);
                     String formatYYYYMMDD = getYYYYMMDDFormat(date);
+                    LocalDate localDate = LocalDate.now();
+                    String today = localDate.toString().replace("-", "");
 
-                    if (!formatYYYYMMDD.equals(alreadyLoadedDay) && date.contains("12:00:00")) {
-
+                    if (!formatYYYYMMDD.equals(alreadyLoadedDay) && date.contains("12:00:00") && (!formatYYYYMMDD.equals(today))) {
                         alreadyLoadedDay = formatYYYYMMDD;
-
                         object = (JSONObject) newObject.get("main");
                         String stringTemperature = object.get("temp").toString();
                         double doubleTemperature = Double.parseDouble(stringTemperature);
@@ -169,11 +165,9 @@ public class SpecificWeatherClient implements WeatherClient {
         String inline = "";
         Scanner scanner = new Scanner(url.openStream());
 
-        //Write all the JSON data into a string using a scanner
         while (scanner.hasNext()) {
             inline += scanner.nextLine();
         }
-
         scanner.close();
 
         return inline;

@@ -63,7 +63,6 @@ public class MainWindowController extends BaseController implements Initializabl
 
     @FXML
     void currentLocationButtonAction()  {
-
         String currentLocation = currentLocationTextField.getText();
         currentLocation = setFirstCapitalLetter(currentLocation);
 
@@ -75,30 +74,34 @@ public class MainWindowController extends BaseController implements Initializabl
             currentLocationLabel.setText(currentLocation);
         } catch(IllegalArgumentException | NullPointerException e) {
             if(currentLocation.equals("")) {
-                errorLabel.setText("Please provide your destination!");
+                errorLabel.setText("Please provide your current location!");
             } else {
                 errorLabel.setText("Wrong city name or connection has been interrupted!" );
+                leftAnchorPane.setVisible(false);
+                currentLocationLabel.setText("CurrentLocation");
             }
         }
     }
 
     @FXML
     void destinationButtonAction() throws IOException {
-        if (destinationTextField.getText().equals("")) {
-            errorLabel.setText("Please provide your destination!");
-        } else {
-            String destination = destinationTextField.getText();
+        String destination = destinationTextField.getText();
+        destination = setFirstCapitalLetter(destination);
+
+        try {
             destinationTextField.clear();
-            errorLabel.setText("");
-            if (Character.isUpperCase(destination.charAt(0))) {
-                destinationLabel.setText(destination);
-            } else {
-                destination = setFirstCapitalLetter(destination);
-                destinationLabel.setText(destination);
-            }
-            System.out.println(destination);
             rightController.showCurrentAndForecastWeather(destination);
             rightAnchorPane.setVisible(true);
+            errorLabel.setText("");
+            destinationLabel.setText(destination);
+        } catch(IllegalArgumentException | NullPointerException e) {
+            if(destination.equals("")) {
+                errorLabel.setText("Please provide your destination!");
+            } else {
+                errorLabel.setText("Wrong city name or connection has been interrupted!" );
+                rightAnchorPane.setVisible(false);
+                currentLocationLabel.setText("Destination");
+            }
         }
     }
 

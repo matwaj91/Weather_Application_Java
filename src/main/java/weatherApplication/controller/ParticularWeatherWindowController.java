@@ -1,23 +1,14 @@
 package weatherApplication.controller;
 
 import javafx.fxml.FXML;
-
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import weatherApplication.model.Weather;
 import weatherApplication.model.WeatherParameters;
-import weatherApplication.model.WeatherService;
-import weatherApplication.model.client.SpecificWeatherClient;
 import weatherApplication.view.ViewFactory;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class ParticularWeatherWindowController extends BaseController{
 

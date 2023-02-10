@@ -55,13 +55,14 @@ public class VBoxController extends BaseController {
             currentWeather = weather.getCurrentWeather();
             weatherForecast = weather.getWeatherForecast();
         } catch (Exception e) {
-            System.out.println("Error");
+            e.printStackTrace();
         }
 
         firstWindowController.fillCurrentWeatherWindow(currentWeather);
-        secondWindowController.fillWeatherForecastWindow(weatherForecast, 1);
-        thirdWindowController.fillWeatherForecastWindow(weatherForecast, 2);
-        fourthWindowController.fillWeatherForecastWindow(weatherForecast, 3);
-        fifthWindowController.fillWeatherForecastWindow(weatherForecast, 4);
+        secondWindowController.fillWeatherForecastWindow(weatherForecast, 0);
+        thirdWindowController.fillWeatherForecastWindow(weatherForecast, 1);
+        fourthWindowController.fillWeatherForecastWindow(weatherForecast, 2);
+        fifthWindowController.fillWeatherForecastWindow(weatherForecast, 3);
+        weatherForecast.clear();
     }
 }
