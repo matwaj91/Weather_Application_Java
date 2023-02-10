@@ -2,7 +2,6 @@ package weatherApplication.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -50,11 +49,6 @@ public class MainWindowController extends BaseController implements Initializabl
     @FXML
     private AnchorPane rightAnchorPane;
 
-
-    public MainWindowController(ViewFactory viewFactory, String fxmlName) {
-        super(viewFactory, fxmlName);
-    }
-
     @FXML
     void currentLocationTextFieldAction() {
     }
@@ -63,17 +57,28 @@ public class MainWindowController extends BaseController implements Initializabl
     void destinationTextFieldAction() {
     }
 
+    public MainWindowController(ViewFactory viewFactory, String fxmlName) {
+        super(viewFactory, fxmlName);
+    }
+
     @FXML
-    void currentLocationButtonAction() throws IOException {
-        if (currentLocationTextField.getText().equals("")) {
-            errorLabel.setText("Please provide your current location!");
-        } else {
-            String currentLocation = currentLocationTextField.getText();
+    void currentLocationButtonAction()  {
+
+        String currentLocation = currentLocationTextField.getText();
+        currentLocation = setFirstCapitalLetter(currentLocation);
+
+        try {
             currentLocationTextField.clear();
-            currentLocationLabel.setText(currentLocation);
-            errorLabel.setText("");
             leftController.showCurrentAndForecastWeather(currentLocation);
             leftAnchorPane.setVisible(true);
+            errorLabel.setText("");
+            currentLocationLabel.setText(currentLocation);
+        } catch(IllegalArgumentException | NullPointerException e) {
+            if(currentLocation.equals("")) {
+                errorLabel.setText("Please provide your destination!");
+            } else {
+                errorLabel.setText("Wrong city name or connection has been interrupted!" );
+            }
         }
     }
 
@@ -84,8 +89,16 @@ public class MainWindowController extends BaseController implements Initializabl
         } else {
             String destination = destinationTextField.getText();
             destinationTextField.clear();
-            destinationLabel.setText(destination);
             errorLabel.setText("");
+            if (Character.isUpperCase(destination.charAt(0))) {
+                destinationLabel.setText(destination);
+            } else {
+                destination = setFirstCapitalLetter(destination);
+                destinationLabel.setText(destination);
+            }
+            System.out.println(destination);
+            rightController.showCurrentAndForecastWeather(destination);
+            rightAnchorPane.setVisible(true);
         }
     }
 
@@ -93,6 +106,15 @@ public class MainWindowController extends BaseController implements Initializabl
     public void initialize(URL url, ResourceBundle resourceBundle) {
         leftAnchorPane.setVisible(false);
         rightAnchorPane.setVisible(false);
+    }
+
+    public String setFirstCapitalLetter(String cityName) {
+        String firstUpperCase = "";
+        if (!cityName.equals("")) {
+            firstUpperCase = cityName.substring(0, 1).toUpperCase()
+                    + cityName.substring(1).toLowerCase();
+        }
+        return firstUpperCase;
     }
 }
 

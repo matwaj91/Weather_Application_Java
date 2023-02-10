@@ -49,31 +49,6 @@ public class ParticularWeatherWindowController extends BaseController{
         super(viewFactory, fxmlName);
     }
 
-    @FXML
-    Parent getWeatherFromClient(String cityName, Parent parent) throws IOException {
-        WeatherService weatherService = new WeatherService(new SpecificWeatherClient());
-        Weather weather;
-
-        try {
-            weather = weatherService.getWeather(cityName);
-            currentWeather = weather.getCurrentWeather();
-            weatherForecast = weather.getWeatherForecast();
-        } catch (Exception e) {
-            System.out.println("Error");
-        }
-
-        for (int i = 0; i < weatherForecast.size(); i++) {
-            this.day.setText(weatherForecast.get(i).getDay());
-            this.image.setImage(new Image(String.valueOf(getClass().getResource("/image/" + weatherForecast.get(i).getIcon() + ".png"))));
-            this.temperature.setText(weatherForecast.get(i).getTemperature());
-            this.pressure.setText(weatherForecast.get(i).getPressure());
-            this.wind.setText(weatherForecast.get(i).getWindSpeed());
-
-
-        }
-        return parent;
-    }
-
     void fillCurrentWeatherWindow(WeatherParameters currentWeather) {
         this.day.setText(currentWeather.getDay());
         this.image.setImage(new Image(String.valueOf(getClass().getResource("/image/" + currentWeather.getIcon() + ".png"))));
@@ -82,11 +57,11 @@ public class ParticularWeatherWindowController extends BaseController{
         this.wind.setText(currentWeather.getWindSpeed());
     }
 
-    /*void fillWeatherForecastWindow(List<WeatherParameters> weatherForecast) {
-        this.day.setText(weatherForecast.get(0).getDay());
-        this.image.setImage(new Image(String.valueOf(getClass().getResource("/image/" + weatherForecast.get(0).getIcon() + ".png"))));
-        this.temperature.setText(weatherForecast.get(0).getTemperature());
-        this.pressure.setText(weatherForecast.get(0).getPressure());
-        this.wind.setText(weatherForecast.get(0).getWindSpeed());
-    }*/
+    void fillWeatherForecastWindow(List<WeatherParameters> weatherForecast, int i) {
+        this.day.setText(weatherForecast.get(i).getDay());
+        this.image.setImage(new Image(String.valueOf(getClass().getResource("/image/" + weatherForecast.get(i).getIcon() + ".png"))));
+        this.temperature.setText(weatherForecast.get(i).getTemperature());
+        this.pressure.setText(weatherForecast.get(i).getPressure());
+        this.wind.setText(weatherForecast.get(i).getWindSpeed());
+    }
 }
