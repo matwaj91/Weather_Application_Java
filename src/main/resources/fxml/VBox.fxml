@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox fx:id="vBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="375.0" spacing="7.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="weatherApplication.controller.VBoxController">
+   <children>
+      <fx:include fx:id="firstWindow" source="ParticularWeatherWindow.fxml" />
+      <fx:include fx:id="secondWindow" source="ParticularWeatherWindow.fxml" />
+      <fx:include fx:id="thirdWindow" source="ParticularWeatherWindow.fxml" />
+      <fx:include fx:id="fourthWindow" source="ParticularWeatherWindow.fxml" />
+      <fx:include fx:id="fifthWindow" source="ParticularWeatherWindow.fxml" />
+   </children>
+</VBox>

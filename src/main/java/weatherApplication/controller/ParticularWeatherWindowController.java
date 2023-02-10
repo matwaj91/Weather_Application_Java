@@ -3,11 +3,11 @@ package weatherApplication.controller;
 import javafx.fxml.FXML;
 
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import weatherApplication.model.Weather;
 import weatherApplication.model.WeatherParameters;
 import weatherApplication.model.WeatherService;
@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ParticularWeatherWindowController extends BaseController implements Initializable {
+public class ParticularWeatherWindowController extends BaseController{
 
     @FXML
     private Label day;
@@ -50,7 +50,7 @@ public class ParticularWeatherWindowController extends BaseController implements
     }
 
     @FXML
-    List<WeatherParameters> getWeatherFromClient(String cityName) throws IOException {
+    Parent getWeatherFromClient(String cityName, Parent parent) throws IOException {
         WeatherService weatherService = new WeatherService(new SpecificWeatherClient());
         Weather weather;
 
@@ -62,9 +62,16 @@ public class ParticularWeatherWindowController extends BaseController implements
             System.out.println("Error");
         }
 
-        fillWeatherForecastWindow(weatherForecast);
+        for (int i = 0; i < weatherForecast.size(); i++) {
+            this.day.setText(weatherForecast.get(i).getDay());
+            this.image.setImage(new Image(String.valueOf(getClass().getResource("/image/" + weatherForecast.get(i).getIcon() + ".png"))));
+            this.temperature.setText(weatherForecast.get(i).getTemperature());
+            this.pressure.setText(weatherForecast.get(i).getPressure());
+            this.wind.setText(weatherForecast.get(i).getWindSpeed());
 
-        return weatherForecast;
+
+        }
+        return parent;
     }
 
     void fillCurrentWeatherWindow(WeatherParameters currentWeather) {
@@ -75,18 +82,11 @@ public class ParticularWeatherWindowController extends BaseController implements
         this.wind.setText(currentWeather.getWindSpeed());
     }
 
-    AnchorPane fillWeatherForecastWindow(List<WeatherParameters> weatherForecast) {
+    /*void fillWeatherForecastWindow(List<WeatherParameters> weatherForecast) {
         this.day.setText(weatherForecast.get(0).getDay());
         this.image.setImage(new Image(String.valueOf(getClass().getResource("/image/" + weatherForecast.get(0).getIcon() + ".png"))));
         this.temperature.setText(weatherForecast.get(0).getTemperature());
         this.pressure.setText(weatherForecast.get(0).getPressure());
         this.wind.setText(weatherForecast.get(0).getWindSpeed());
-
-        return particularWeatherWindow;
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println(weatherForecast);
-    }
+    }*/
 }

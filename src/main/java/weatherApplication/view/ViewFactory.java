@@ -16,6 +16,11 @@ public class ViewFactory {
         initializeStage(controller);
     }
 
+    public Parent loadParticularWeatherWindow() throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("/fxml/ParticularWeatherWindow.fxml"));
+        return parent;
+    }
+
     private void initializeStage(BaseController controller) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(controller.getFxmlName()));
         fxmlLoader.setController(controller);

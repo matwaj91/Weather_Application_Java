@@ -2,24 +2,26 @@ package weatherApplication.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import weatherApplication.model.WeatherParameters;
 import weatherApplication.view.ViewFactory;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class MainWindowController extends BaseController implements Initializable{
+public class MainWindowController extends BaseController implements Initializable {
 
     @FXML
-    ParticularWeatherWindowController leftController;
+    VBoxController leftController;
+
+    @FXML
+    VBoxController rightController;
 
     @FXML
     private Label errorLabel;
@@ -43,12 +45,10 @@ public class MainWindowController extends BaseController implements Initializabl
     private Label destinationLabel;
 
     @FXML
-    private VBox leftVBox;
+    private AnchorPane leftAnchorPane;
 
     @FXML
-    private VBox rightVBox;
-
-    private List<WeatherParameters> weatherForecast;
+    private AnchorPane rightAnchorPane;
 
 
     public MainWindowController(ViewFactory viewFactory, String fxmlName) {
@@ -72,11 +72,8 @@ public class MainWindowController extends BaseController implements Initializabl
             currentLocationTextField.clear();
             currentLocationLabel.setText(currentLocation);
             errorLabel.setText("");
-            leftVBox.setVisible(true);
-            weatherForecast = leftController.getWeatherFromClient(currentLocation);
-            for (int i = 0; i < 5; i++) {
-                leftVBox.getChildren().add(new AnchorPane(leftController.fillWeatherForecastWindow(weatherForecast)));
-            }
+            leftController.showCurrentAndForecastWeather(currentLocation);
+            leftAnchorPane.setVisible(true);
         }
     }
 
@@ -94,7 +91,8 @@ public class MainWindowController extends BaseController implements Initializabl
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-       leftVBox.setVisible(false);
+        leftAnchorPane.setVisible(false);
+        rightAnchorPane.setVisible(false);
     }
 }
 
