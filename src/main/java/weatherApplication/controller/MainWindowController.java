@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import weatherApplication.view.ViewFactory;
 
 import java.io.IOException;
@@ -78,7 +77,7 @@ public class MainWindowController extends BaseController implements Initializabl
             } else {
                 errorLabel.setText("Wrong city name or connection has been interrupted!" );
                 leftAnchorPane.setVisible(false);
-                currentLocationLabel.setText("CurrentLocation");
+                currentLocationLabel.setText("Current Location");
             }
         }
     }
