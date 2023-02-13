@@ -100,7 +100,7 @@ public class MainWindowController extends BaseController implements Initializabl
             } else {
                 errorLabel.setText("Wrong city name or connection has been interrupted!" );
                 rightAnchorPane.setVisible(false);
-                currentLocationLabel.setText("Destination");
+                destinationLabel.setText("Destination");
             }
         }
     }
