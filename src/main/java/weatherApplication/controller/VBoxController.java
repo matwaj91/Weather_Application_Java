@@ -6,7 +6,6 @@ import weatherApplication.model.Weather;
 import weatherApplication.model.WeatherParameters;
 import weatherApplication.model.WeatherService;
 import weatherApplication.model.client.SpecificWeatherClient;
-import weatherApplication.view.ViewFactory;
 
 import java.util.List;
 
@@ -30,8 +29,7 @@ public class VBoxController extends BaseController {
     @FXML
     private ParticularWeatherWindowController fifthWindowController;
 
-    private WeatherParameters currentWeather;
-    private List<WeatherParameters> weatherForecast;
+    private List<WeatherParameters> weatherData;
 
     public VBoxController() {}
 
@@ -42,17 +40,16 @@ public class VBoxController extends BaseController {
 
         try {
             weather = weatherService.getWeather(cityName);
-            currentWeather = weather.getCurrentWeather();
-            weatherForecast = weather.getWeatherForecast();
+            weatherData = weather.getWeatherData();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        firstWindowController.fillCurrentWeatherWindow(currentWeather);
-        secondWindowController.fillWeatherForecastWindow(weatherForecast, 0);
-        thirdWindowController.fillWeatherForecastWindow(weatherForecast, 1);
-        fourthWindowController.fillWeatherForecastWindow(weatherForecast, 2);
-        fifthWindowController.fillWeatherForecastWindow(weatherForecast, 3);
-        weatherForecast.clear();
+        firstWindowController.fillWeatherWindow(weatherData, 0);
+        secondWindowController.fillWeatherWindow(weatherData, 1);
+        thirdWindowController.fillWeatherWindow(weatherData, 2);
+        fourthWindowController.fillWeatherWindow(weatherData, 3);
+        fifthWindowController.fillWeatherWindow(weatherData, 4);
+        weatherData.clear();
     }
 }

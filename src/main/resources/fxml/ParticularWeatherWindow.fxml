@@ -11,12 +11,12 @@
     <Label alignment="CENTER" layoutX="7.0" prefHeight="70.0" prefWidth="372.0" style="-fx-border-color: black; -fx-border-width: 2;" styleClass="control" stylesheets="@../css/Style.css" AnchorPane.leftAnchor="0.0" />
     <HBox alignment="CENTER" layoutX="12.0" layoutY="5.0" prefHeight="60.0" prefWidth="355.0">
         <children>
-            <Label fx:id="day" alignment="CENTER" prefHeight="59.0" prefWidth="70.0" text="Saturday">
+            <Label fx:id="day" alignment="CENTER" prefHeight="59.0" prefWidth="79.0" text="Saturday">
                 <font>
                     <Font size="14.0" />
                 </font>
             </Label>
-            <ImageView fx:id="image" fitHeight="60.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image" fitHeight="60.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
             <VBox prefHeight="60.0" prefWidth="89.0">
                 <children>
                     <Label alignment="CENTER" prefHeight="30.0" prefWidth="95.0" text="Temperature:">

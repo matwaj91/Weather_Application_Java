@@ -4,28 +4,20 @@ import java.util.List;
 
 public class Weather {
 
-    private final WeatherParameters currentWeather;
+    private final List<WeatherParameters> weatherData;
 
-    private final List<WeatherParameters> weatherForecast;
-
-    public Weather(WeatherParameters currentWeather, List<WeatherParameters> weatherForecastParameters) {
-        this.currentWeather = currentWeather;
-        this.weatherForecast = weatherForecastParameters;
+    public Weather(List<WeatherParameters> weatherData) {
+        this.weatherData = weatherData;
     }
 
-    public WeatherParameters getCurrentWeather() {
-        return currentWeather;
-    }
-
-    public List<WeatherParameters> getWeatherForecast() {
-        return weatherForecast;
+    public List<WeatherParameters> getWeatherData() {
+        return weatherData;
     }
 
     @Override
     public String toString() {
         return "Weather{" +
-                "currentWeather=" + currentWeather +
-                ", weatherForecast=" + weatherForecast +
+                "weatherData=" + weatherData +
                 '}';
     }
 }

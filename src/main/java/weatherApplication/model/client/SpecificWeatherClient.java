@@ -17,17 +17,17 @@ import java.time.LocalDate;
 
 public class SpecificWeatherClient implements WeatherClient {
 
+    private List<WeatherParameters> weatherData = new ArrayList<>();
+
     @Override
     public Weather getWeather(String cityName) {
 
-        WeatherParameters currentWeather = getCurrentWeather(cityName);
-        List<WeatherParameters> forecastWeather = getForecastWeather(cityName);
-        return new Weather(currentWeather, forecastWeather);
+        weatherData = getCurrentWeather(cityName);
+        weatherData = getForecastWeather(cityName);
+        return new Weather(weatherData);
     }
 
     private List<WeatherParameters> getForecastWeather(String cityName) {
-
-        List<WeatherParameters> forecastWeather = new ArrayList<>();
 
         try {
             URL url = new URL("http://api.openweathermap.org/data/2.5/forecast?q="
@@ -76,11 +76,11 @@ public class SpecificWeatherClient implements WeatherClient {
 
                         WeatherParameters weatherParameters =
                                 new WeatherParameters(day, icon, temperature, pressure, windSpeed);
-                        forecastWeather.add(weatherParameters);
+                        weatherData.add(weatherParameters);
                     }
                 }
             }
-            return forecastWeather;
+            return weatherData;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -107,7 +107,7 @@ public class SpecificWeatherClient implements WeatherClient {
         return firstUpperCase;
     }
 
-    private WeatherParameters getCurrentWeather(String cityName) {
+    private List<WeatherParameters> getCurrentWeather(String cityName) {
 
         try {
             URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q="
@@ -143,7 +143,11 @@ public class SpecificWeatherClient implements WeatherClient {
                 JSONObject objectFromArray = (JSONObject) array.get(0);
                 String icon = objectFromArray.get("icon").toString();
 
-                return new WeatherParameters(day, icon, temperature, pressure, windSpeed);
+                WeatherParameters weatherParameters =
+                        new WeatherParameters(day, icon, temperature, pressure, windSpeed);
+                weatherData.add(weatherParameters);
+
+                return weatherData;
             }
         } catch (Exception e) {
             e.printStackTrace();
