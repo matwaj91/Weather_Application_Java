@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Weather {
 
-    private WeatherParameters currentWeather;
+    private final WeatherParameters currentWeather;
 
-    private List<WeatherParameters> weatherForecast;
+    private final List<WeatherParameters> weatherForecast;
 
     public Weather(WeatherParameters currentWeather, List<WeatherParameters> weatherForecastParameters) {
         this.currentWeather = currentWeather;

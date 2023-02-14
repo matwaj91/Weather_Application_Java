@@ -1,7 +1,6 @@
 package weatherApplication.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
 import weatherApplication.model.Weather;
 import weatherApplication.model.WeatherParameters;
@@ -9,9 +8,7 @@ import weatherApplication.model.WeatherService;
 import weatherApplication.model.client.SpecificWeatherClient;
 import weatherApplication.view.ViewFactory;
 
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class VBoxController extends BaseController {
 
@@ -33,17 +30,10 @@ public class VBoxController extends BaseController {
     @FXML
     private ParticularWeatherWindowController fifthWindowController;
 
-
     private WeatherParameters currentWeather;
     private List<WeatherParameters> weatherForecast;
 
-
-    public VBoxController(ViewFactory viewFactory, String fxmlName) {
-        super(viewFactory, fxmlName);
-    }
-
-    public VBoxController() {
-    }
+    public VBoxController() {}
 
     @FXML
     void showCurrentAndForecastWeather(String cityName) {

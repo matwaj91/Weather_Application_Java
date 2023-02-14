@@ -48,14 +48,6 @@ public class MainWindowController extends BaseController implements Initializabl
     @FXML
     private AnchorPane rightAnchorPane;
 
-    @FXML
-    void currentLocationTextFieldAction() {
-    }
-
-    @FXML
-    void destinationTextFieldAction() {
-    }
-
     public MainWindowController(ViewFactory viewFactory, String fxmlName) {
         super(viewFactory, fxmlName);
     }
@@ -110,7 +102,7 @@ public class MainWindowController extends BaseController implements Initializabl
         rightAnchorPane.setVisible(false);
     }
 
-    public String setFirstCapitalLetter(String cityName) {
+    private String setFirstCapitalLetter(String cityName) {
         String firstUpperCase = "";
         if (!cityName.equals("")) {
             firstUpperCase = cityName.substring(0, 1).toUpperCase()

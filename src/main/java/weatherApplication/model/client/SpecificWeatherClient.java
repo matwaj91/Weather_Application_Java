@@ -17,8 +17,6 @@ import java.time.LocalDate;
 
 public class SpecificWeatherClient implements WeatherClient {
 
-    private final static List<WeatherParameters> forecastWeather = new ArrayList<>();
-
     @Override
     public Weather getWeather(String cityName) {
 
@@ -28,6 +26,9 @@ public class SpecificWeatherClient implements WeatherClient {
     }
 
     private List<WeatherParameters> getForecastWeather(String cityName) {
+
+        List<WeatherParameters> forecastWeather = new ArrayList<>();
+
         try {
             URL url = new URL("http://api.openweathermap.org/data/2.5/forecast?q="
                     + cityName + "&units=metric&appid=" + Config.API_KEY + "&lang=eng&units=metric");
@@ -119,11 +120,9 @@ public class SpecificWeatherClient implements WeatherClient {
             } else {
                 String inline = writeAllJsonDataToString(url);
 
-                //Using the JSON simple library parse the string into a json object
                 JSONParser parse = new JSONParser();
                 JSONObject jsonObject = (JSONObject) parse.parse(inline);
 
-                //Get the required object from the above created object
                 JSONObject object;
                 JSONArray array;
 

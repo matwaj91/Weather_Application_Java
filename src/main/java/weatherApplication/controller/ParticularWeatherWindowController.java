@@ -6,7 +6,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import weatherApplication.model.WeatherParameters;
-import weatherApplication.view.ViewFactory;
 
 import java.util.List;
 
@@ -33,12 +32,7 @@ public class ParticularWeatherWindowController extends BaseController{
     private WeatherParameters currentWeather;
     private List<WeatherParameters> weatherForecast;
 
-    public ParticularWeatherWindowController() {
-    }
-
-    public ParticularWeatherWindowController(ViewFactory viewFactory, String fxmlName) {
-        super(viewFactory, fxmlName);
-    }
+    public ParticularWeatherWindowController() {}
 
     void fillCurrentWeatherWindow(WeatherParameters currentWeather) {
         this.day.setText(currentWeather.getDay());
