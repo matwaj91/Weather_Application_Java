@@ -17,17 +17,16 @@ import java.time.LocalDate;
 
 public class SpecificWeatherClient implements WeatherClient {
 
-    private List<WeatherParameters> weatherData = new ArrayList<>();
+    private final List<WeatherParameters> weatherData = new ArrayList<>();
 
     @Override
     public Weather getWeather(String cityName) {
-
-        weatherData = getCurrentWeather(cityName);
-        weatherData = getForecastWeather(cityName);
+        getCurrentWeather(cityName);
+        getForecastWeather(cityName);
         return new Weather(weatherData);
     }
 
-    private List<WeatherParameters> getForecastWeather(String cityName) {
+    private void getForecastWeather(String cityName) {
 
         try {
             URL url = new URL("http://api.openweathermap.org/data/2.5/forecast?q="
@@ -80,11 +79,9 @@ public class SpecificWeatherClient implements WeatherClient {
                     }
                 }
             }
-            return weatherData;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
 
     private String getYYYYMMDDFormat(String date) {
@@ -107,7 +104,7 @@ public class SpecificWeatherClient implements WeatherClient {
         return firstUpperCase;
     }
 
-    private List<WeatherParameters> getCurrentWeather(String cityName) {
+    private void getCurrentWeather(String cityName) {
 
         try {
             URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q="
@@ -146,13 +143,10 @@ public class SpecificWeatherClient implements WeatherClient {
                 WeatherParameters weatherParameters =
                         new WeatherParameters(day, icon, temperature, pressure, windSpeed);
                 weatherData.add(weatherParameters);
-
-                return weatherData;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
 
     private int getResponse(URL url) throws IOException {

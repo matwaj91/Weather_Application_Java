@@ -63,7 +63,7 @@ public class MainWindowController extends BaseController implements Initializabl
             leftAnchorPane.setVisible(true);
             errorLabel.setText("");
             currentLocationLabel.setText(currentLocation);
-        } catch(IllegalArgumentException | NullPointerException e) {
+        } catch(Exception e) {
             if(currentLocation.equals("")) {
                 errorLabel.setText("Please provide your current location!");
             } else {
@@ -85,7 +85,7 @@ public class MainWindowController extends BaseController implements Initializabl
             rightAnchorPane.setVisible(true);
             errorLabel.setText("");
             destinationLabel.setText(destination);
-        } catch(IllegalArgumentException | NullPointerException e) {
+        } catch(Exception e) {
             if(destination.equals("")) {
                 errorLabel.setText("Please provide your destination!");
             } else {
