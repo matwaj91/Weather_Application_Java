@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static weatherApplication.AuxiliaryMethods.setFirstCapitalLetter;
+
 
 public class MainWindowController extends BaseController implements Initializable {
 
@@ -75,7 +77,7 @@ public class MainWindowController extends BaseController implements Initializabl
     }
 
     @FXML
-    void destinationButtonAction() throws IOException {
+    void destinationButtonAction() {
         String destination = destinationTextField.getText();
         destination = setFirstCapitalLetter(destination);
 
@@ -100,15 +102,6 @@ public class MainWindowController extends BaseController implements Initializabl
     public void initialize(URL url, ResourceBundle resourceBundle) {
         leftAnchorPane.setVisible(false);
         rightAnchorPane.setVisible(false);
-    }
-
-    private String setFirstCapitalLetter(String cityName) {
-        String firstUpperCase = "";
-        if (!cityName.equals("")) {
-            firstUpperCase = cityName.substring(0, 1).toUpperCase()
-                    + cityName.substring(1).toLowerCase();
-        }
-        return firstUpperCase;
     }
 }
 
