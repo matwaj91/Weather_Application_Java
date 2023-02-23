@@ -11,13 +11,12 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.time.LocalDate;
 
-import static weatherApplication.AuxiliaryMethods.setFirstCapitalLetter;
+import static weatherApplication.AuxiliaryMethods.getNameDay;
 
 public class SpecificWeatherClient implements WeatherClient {
 
@@ -151,17 +150,5 @@ public class SpecificWeatherClient implements WeatherClient {
     private JSONObject parseStringIntoJsonObject(String inline) throws ParseException {
         JSONParser parse = new JSONParser();
         return (JSONObject) parse.parse(inline);
-    }
-
-    private String getNameDay(String date) {
-        date = date.replace("-", "");
-        int year = Integer.parseInt(date.substring(0, 4));
-        int month = Integer.parseInt(date.substring(4, 6));
-        int day = Integer.parseInt(date.substring(6, 8));
-
-        LocalDate localDate = LocalDate.of(year, month, day);
-        DayOfWeek dayOfWeek = localDate.getDayOfWeek();
-        String stringDayOfWeek = dayOfWeek.toString();
-        return setFirstCapitalLetter(stringDayOfWeek);
     }
 }
