@@ -23,10 +23,11 @@ class WeatherServiceTest {
     @InjectMocks
     private WeatherService weatherService = new WeatherService(weatherClient);
 
+    Weather expectedWeather = new Weather(prepareWeatherData());
+
     @Test
     void shouldReturnWeather() throws IOException {
         //given
-        Weather expectedWeather = new Weather(prepareWeatherData());
         given(weatherClient.getWeather("Berlin")).willReturn(expectedWeather);
 
         //when
@@ -39,7 +40,6 @@ class WeatherServiceTest {
     @Test
     void shouldNotReturnWeatherIfTwoDifferentCities() throws IOException {
         //given
-        Weather expectedWeather = new Weather(prepareWeatherData());
         given(weatherClient.getWeather("Berlin")).willReturn(expectedWeather);
 
         //when
