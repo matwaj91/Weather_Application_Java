@@ -2,6 +2,7 @@ package weatherApplication.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
+import org.springframework.web.client.RestTemplate;
 import weatherApplication.model.Weather;
 import weatherApplication.model.WeatherParameters;
 import weatherApplication.model.WeatherService;
@@ -35,7 +36,7 @@ public class VBoxController extends BaseController {
 
     @FXML
     void showCurrentAndForecastWeather(String cityName) {
-        WeatherService weatherService = new WeatherService(new SpecificWeatherClient());
+        WeatherService weatherService = new WeatherService(new SpecificWeatherClient(new RestTemplate()));
         Weather weather;
 
         try {

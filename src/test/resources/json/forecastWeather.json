@@ -1,0 +1,109 @@
+{
+  "list": [
+    {
+      "main": {
+        "temp": 2,
+        "pressure": 1035
+      },
+      "weather": [
+        {
+          "icon": "05n"
+        }
+      ],
+      "wind": {
+        "speed": 1.20
+      },
+      "dt_txt": "2020-01-01 09:00:00"
+    },
+    {
+      "main": {
+        "temp": -0.88,
+        "pressure": 1016
+      },
+      "weather": [
+        {
+          "icon": "02n"
+        }
+      ],
+      "wind": {
+        "speed": 1.07
+      },
+      "dt_txt": "2020-01-01 12:00:00"
+    },
+    {
+      "main": {
+        "temp": -0.88,
+        "pressure": 1016
+      },
+      "weather": [
+        {
+          "icon": "02n"
+        }
+      ],
+      "wind": {
+        "speed": 1.07
+      },
+      "dt_txt": "2020-01-01 12:00:00"
+    },
+    {
+      "main": {
+        "temp": -1.08,
+        "pressure": 1020
+      },
+      "weather": [
+        {
+          "icon": "02n"
+        }
+      ],
+      "wind": {
+        "speed": 0.9
+      },
+      "dt_txt": "2020-01-02 12:00:00"
+    },
+    {
+      "main": {
+        "temp": -0.98,
+        "pressure": 1025
+      },
+      "weather": [
+        {
+          "icon": "01d"
+        }
+      ],
+      "wind": {
+        "speed": 0.98
+      },
+      "dt_txt": "2020-01-03 12:00:00"
+    },
+    {
+      "main": {
+        "temp": 2.82,
+        "pressure": 1025
+      },
+      "weather": [
+        {
+          "icon": "02d"
+        }
+      ],
+      "wind": {
+        "speed": 1.54
+      },
+      "dt_txt": "2020-01-04 12:00:00"
+    },
+    {
+      "main": {
+        "temp": 5.02,
+        "pressure": 1023
+      },
+      "weather": [
+        {
+          "icon": "02d"
+        }
+      ],
+      "wind": {
+        "speed": 1.03
+      },
+      "dt_txt": "2020-01-05 12:00:00"
+    }
+  ]
+}

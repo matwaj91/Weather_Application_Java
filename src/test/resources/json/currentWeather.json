@@ -1,0 +1,14 @@
+{
+  "weather": [
+    {
+      "icon": "02d"
+    }
+  ],
+  "main": {
+    "temp": 3.9,
+    "pressure": 998
+  },
+  "wind": {
+    "speed": 1.97
+  }
+}
